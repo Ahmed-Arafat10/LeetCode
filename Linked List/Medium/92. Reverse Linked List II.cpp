@@ -47,3 +47,90 @@
         }
 
     };
+    
+ /// ------ Another Approach [Recursive]
+ /**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution
+{
+public:
+    ListNode *L ;
+    int cnt = 0;
+    bool is = true;
+    void ReverseRecursive(ListNode *R, int left, int right)
+    {
+        cnt++;
+        if(cnt == left) L = R;
+        if(cnt == right)
+        {
+            int temp = R->val;
+            R->val = L->val;
+            L->val = temp;
+            return;
+        }
+        else if(R) ReverseRecursive(R->next,left,right);
+        if(L == R || R->next == L) is = false;
+        if(L->next) L = L->next;
+        if(is)
+        {
+            int temp = R->val;
+            R->val = L->val;
+            L->val = temp;
+        }
+    }
+    ListNode* reverseBetween(ListNode* head, int left, int right)
+    {
+        L = head;
+        ReverseRecursive(head,left,right);
+        return head;
+    }
+};
+
+ /// ------ Another Approach [Recursive 2]
+ 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution
+{
+public:
+    ListNode *L ;
+    int cnt = 0;
+    bool is = true;
+    void ReverseRecursive(ListNode *R, int left, int right)
+    {
+        if(right == 1) return;
+        if(left > 1) L = L->next;
+        R = R->next;
+        ReverseRecursive(R,left-1,right-1);
+        if(L == R || R->next == L) is = false;
+        if(is)
+        {
+            int temp = R->val;
+            R->val = L->val;
+            L->val = temp;
+            L = L->next;
+        }
+    }
+    ListNode* reverseBetween(ListNode* head, int left, int right)
+    {
+        L = head;
+        ReverseRecursive(head,left,right);
+        return head;
+    }
+};
