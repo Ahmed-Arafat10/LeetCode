@@ -45,7 +45,7 @@ public:
     }
 };
 
-/// ------------------- Second Approuch
+/// ------------------- Second Approach
 
 /**
  * Definition for singly-linked list.
