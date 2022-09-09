@@ -1,22 +1,15 @@
 #include <bits/stdc++.h>
 typedef long long ll;
 using namespace std;
-    static ll  p = 1;
+static ll  p = 1;
 class Solution {
 
 public:
 
     bool isPowerOfTwo(ll n) {
-        if(n == p) 
-        {
-            p =1;
-            return 1;
-        }
-        if(p > n) 
-        {   p =1;
-            return 0;
-        }
-        p*=2;
+        if(n == p) return 1;
+        if(p > n)  return 0;
+        p *= 2;
         return isPowerOfTwo(n);
     }
 };
